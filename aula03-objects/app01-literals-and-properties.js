@@ -29,3 +29,11 @@ std1.school = 'ISEL'
 
 reflectProps(std1)
 reflectProps(std2)
+
+function reflectProps(obj) {
+    // Type klass = std1.GetType()
+    for (let key in obj) {
+        console.log(key + ' = ' + obj[key])
+        // klass.GetField(key).GetValue(std1)
+    }    
+}
