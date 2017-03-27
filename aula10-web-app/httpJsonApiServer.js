@@ -22,13 +22,13 @@ function callback(req, resp) {
     const urlObj = url.parse(req.url, true)
     let action
     if (urlObj.pathname == parseTime) {
-        action = timeService.parseTime
+        action = timeService.parsetime
     }
     else if (urlObj.pathname == unixTime) {
-        action = timeService.unixTime
+        action = timeService.unixtime
     }
     else if (urlObj.pathname == dateTime) {
-        action = timeService.dateTime
+        action = timeService.datetime
     }
     if(action != undefined) {
         /**

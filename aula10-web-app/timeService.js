@@ -4,20 +4,20 @@
  * Domain service. Has nothing related with HTTP context.
  */
 module.exports = {
-    parseTime,
-    unixTime,
-    dateTime
+    parsetime,
+    unixtime,
+    datetime
 }
 
-function parseTime(iso) {
+function parsetime(iso) {
     return new ParseTime(new Date(iso))
 }
 
-function unixTime(iso) {
+function unixtime(iso) {
     return new UnixTime(new Date(iso))
 }
 
-function dateTime(iso) {
+function datetime(iso) {
     return new DateTime(new Date(iso))
 }
 
