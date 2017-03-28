@@ -6,7 +6,8 @@
 module.exports = {
     parsetime,
     unixtime,
-    datetime
+    datetime,
+    hello
 }
 
 function parsetime(iso) {
@@ -19,6 +20,10 @@ function unixtime(iso) {
 
 function datetime(iso) {
     return new DateTime(new Date(iso))
+}
+
+function hello(){
+    return "Hello World!!!"
 }
 
 /**
