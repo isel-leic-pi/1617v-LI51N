@@ -1,7 +1,7 @@
 'use strict'
 
 const req = require('request')
-const League = require('./League')
+const League = require('./model/League')
 
 const FOOTBALL_HOST = 'http://api.football-data.org/v1/'
 
@@ -22,6 +22,6 @@ function getLeagues(cb) {
 
 }
 
-function getLeagueTable(cb) {
+function getLeagueTable(id, cb) {
     
 }

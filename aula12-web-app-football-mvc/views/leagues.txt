@@ -1,0 +1,7 @@
+<html>
+    <body>
+        <table>
+        %s
+        </table>
+    </body>
+</html>

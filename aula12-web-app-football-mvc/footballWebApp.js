@@ -1,6 +1,6 @@
 const http = require('http')
 const url = require('url')
-const football = require('./footballService')
+const footballCtr = require('./controller/footballController')
 
 const port = process.argv[2] | 3000
 
@@ -16,7 +16,7 @@ function httpServerListener(req, resp) {
     const urlObj = url.parse(req.url, true)
     const parts = urlObj.pathname.split('/')
     const endpoint = parts[2]
-    let action = football[endpoint]
+    let action = footballCtr[endpoint]
     if(action == undefined || parts[1] != 'football') {
         sendResponse(404)
     } else {
@@ -25,10 +25,9 @@ function httpServerListener(req, resp) {
          * 2. Representação: Obter uma String com a representação JSON do recurso.
          * 3. Envio da resposta: statusCode 200 + send() + end()
          */
-        action((err, obj) => {
+        action(urlObj.query, (err, data) => {
             if(err) sendResponse(500, err.message)
-            const data = JSON.stringify(obj)
-            resp.writeHead(200, { 'Content-Type': 'application/json' })
+            resp.writeHead(200, { 'Content-Type': 'text/html' })
             resp.end(data)
         })
     }
