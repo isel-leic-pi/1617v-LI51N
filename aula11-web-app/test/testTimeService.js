@@ -2,7 +2,7 @@
 
 const timeService = require('./../timeService')
 
-module.exports.textParseTime = function(test) {
+module.exports.testParseTime = function(test) {
     const arg = '2013-08-10T18:10:15.474Z'
     const actual = timeService.parsetime(arg)
     const expect = {
@@ -14,7 +14,7 @@ module.exports.textParseTime = function(test) {
     test.done()
 }
 
-module.exports.textUnixtime = function(test) {
+module.exports.testUnixtime = function(test) {
     const arg = '2013-08-10T18:10:15.474Z'
     const actual = timeService.unixtime(arg)
     const expect = {
