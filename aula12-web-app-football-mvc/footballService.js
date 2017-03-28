@@ -14,9 +14,9 @@ function getLeagues(cb) {
     req(path, (err, resp, body) => {
         if(err) cb(err)
         const data = JSON.parse(body.toString())
-        const leaguesArray = []
-        for(let i = 0; i < data.length; i++)
-            leaguesArray[i] = new League(data[i])
+        // const leaguesArray = []
+        // data.forEach(obj => leaguesArray.push(new League(obj)))
+        const leaguesArray = data.map(obj => new League(obj))
         cb(null, leaguesArray) // Na ausencia de erro o 1º arg é null
     })
 

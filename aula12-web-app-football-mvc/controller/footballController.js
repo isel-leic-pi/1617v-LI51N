@@ -15,10 +15,14 @@ const leagueRow = fs.readFileSync('./views/leagueRow.txt').toString()
 function leagues(query, cb) {
     football.getLeagues((err, leagues) => {
         if(err) cb(err)
-        let tableContent = ''
-        for(let i = 0; i < leagues.length; i++) {
-            tableContent += util.format(leagueRow, leagues[i].league, leagues[i].caption, leagues[i].year);
-        }
+
+        /*
+        const tableContent = leagues
+            .map(l => util.format(leagueRow, l.league, l.caption, l.year))
+            .join('')
+            */
+        const tableContent = leagues
+            .reduce((prev, l) => prev + util.format(leagueRow, l.league, l.caption, l.year), '')
         cb(null, util.format(leaguesView, tableContent))
     })
 }
