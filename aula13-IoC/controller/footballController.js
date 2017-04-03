@@ -9,8 +9,10 @@ module.exports = {
     leagueTable
 }
 
-let leaguesView = fs.readFileSync('./views/leagues.txt').toString()
+const leaguesView = fs.readFileSync('./views/leagues.txt').toString()
 const leagueRow = fs.readFileSync('./views/leagueRow.txt').toString()
+const leagueTableView = fs.readFileSync('./views/leagueTable.txt').toString()
+const leagueTableRow = fs.readFileSync('./views/leagueTableRow.txt').toString()
 
 function leagues(query, cb) {
     football.getLeagues((err, leagues) => {
@@ -28,7 +30,23 @@ function leagues(query, cb) {
 }
 
 function leagueTable(query, cb) {
+    if(!query.id) return cb(new Error('Id not found'))
 
-    
+    football.getLeagueTable(query.id, (err, leagueTable) => {
+        if(err) return cb(err)
+        const tableContent = leagueTable.teams.reduce((prev, t) => prev + fillTableRow(t), '')
+        const tableView = util.format(leagueTableView, leagueTable.id, leagueTable.caption, tableContent)
+        cb(null, tableView)
+    })
 }
 
+function fillTableRow(team) {
+    return util.format(
+        leagueTableRow, 
+        team.urlTeam, 
+        team.id,
+        team.name,
+        team.position,
+        team.points,
+        team.goals)
+}

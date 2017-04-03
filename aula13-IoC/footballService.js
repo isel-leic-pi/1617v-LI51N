@@ -2,6 +2,7 @@
 
 const req = require('request')
 const League = require('./model/League')
+const LeagueTable = require('./model/LeagueTable.js')
 
 const FOOTBALL_HOST = 'http://api.football-data.org/v1/'
 
@@ -23,5 +24,12 @@ function getLeagues(cb) {
 }
 
 function getLeagueTable(id, cb) {
-    
+	
+    const path = FOOTBALL_HOST +'competitions/'+ id + '/leagueTable'
+ 
+    req(path, (err, resp, body) => {
+        if(err) return cb(err)
+        const data = JSON.parse(body.toString())
+        cb(null, new LeagueTable(id,data)) 
+    })
 }
