@@ -1,0 +1,22 @@
+<html>
+    <body>
+    <p> ID= %s</p>
+    <p> Caption= %s</p>
+    
+       <table>
+ 			<thead>
+	 			<tr>
+				 	<td>Id </td>
+				 	<td>Name </td>
+				  	<td>Position</td>
+				  	<td>Points</td>
+				  	<td> Goals</td>
+				</tr>
+	 		</thead>
+	 		<tbody>
+	 			%s
+	 		</tbody>
+	    </table>
+
+    </body>
+</html>
