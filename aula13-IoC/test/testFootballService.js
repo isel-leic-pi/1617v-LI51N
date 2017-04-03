@@ -1,6 +1,7 @@
 'use strict'
 
-const football = require('./../footballService')
+const req = require('request')
+const football = require('./../footballService')(req)
 
 module.exports.testGetLeagues = function(test) {
 
