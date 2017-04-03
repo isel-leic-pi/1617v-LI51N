@@ -18,10 +18,10 @@ function httpServerListener(req, resp) {
     const endpoint = parts[2]
     let action = footballCtr[endpoint]
     if(action == undefined || parts[1] != 'football') {
-        sendResponse(404)
+        sendResponse(404, 'Resource not Found')
     } else {
         /**
-         * 1. Call action
+         * 1. Call action with query-string arguments
          * 2. Representação: Obter uma String com a representação JSON do recurso.
          * 3. Envio da resposta: statusCode 200 + send() + end()
          */
