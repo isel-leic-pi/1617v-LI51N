@@ -11,11 +11,17 @@
             "program": "${workspaceRoot}\\footballWebApp.js"
         },
         {
+            "name": "nodeunit",
             "type": "node",
-            "request": "attach",
-            "name": "Attach to Process",
-            "address": "localhost",
-            "port": 5858
-        }
+            "request": "launch",
+            "program": "C:\\Users\\mcarvalho\\AppData\\Roaming\\npm\\node_modules\\nodeunit\\bin\\nodeunit",
+            "stopOnEntry": false,
+            "args": [],
+            "cwd": "${workspaceRoot}",
+            "runtimeExecutable": null,
+            "env": {
+                "NODE_ENV": "testing"
+            }
+        },
     ]
 }
