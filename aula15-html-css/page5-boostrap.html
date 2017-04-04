@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+        <title>My First Page</title>
+        <link type="text/css" rel="stylesheet" href="assets/css/bootstrap.min.css" />
+	</head>
+<body>
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation" class="active"><a href="/">Home</a></li>
+                <li role="presentation"><a href="#praias">Praias</a></li>
+                <li role="presentation"><a href="#capitais">Capitais</a></li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Project name</h3>
+    </div>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>A minha primeira página HTML</h1>
+        </div>
+    </div>
+    <div class="container">
+            <h1>Exemplo de utilização de alguns elementos</h1>
+            <p>
+                Aqui vamos colocar um link para uma pagina
+                <a href="http://desporto.sapo.pt" target="_blank">Informação de Desporto</a>
+                <a href="#praias">Praias</a>, <a href="#capitais">Capitais</a>,
+            </p>
+            <p>
+            <p id="intro">Algumas das melhores experiências de viagens, rotas e destinos.</p>
+            <p>Estas experiências estão organizadas por diferentes categorias nomeadamente: praias paradisíacas, capitais do mundo, adrenalina e <a href="#secCircuitos">circuitos</a>.</p>
+
+            <div class="row">
+                <!-- ############################################################## -->
+
+                <div class="col-xs-6">
+                    <h2 id="praias">Praias paradisíacas</h2>
+                    <p>Algumas das melhores praias paradísiacas que já descobri em Portugal e também noutros países.</p>
+                    <p>No caso das praias portuguesas o objectivo é que sejam praias apetecíveis mesmo em épocas de maior afluência como Agosto.</p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Descrição</th>
+                                <th>Água</th>
+                                <th>Paisagem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Carvalhal</td>
+                                <td>Com pouca gente</td>
+                                <td>Água gelada</td>
+                                <td>Agradável</td>
+                            </tr>
+                            <tr>
+                                <td>Zavial</td>
+                                <td>Deserta</td>
+                                <td>Água gelada</td>
+                                <td>Soberba</td>
+                            </tr>
+                            <tr>
+                                <td>Carcavelos</td>
+                                <td>Urbana</td>
+                                <td colspan="2" class="cellEmpty"> NA</td>
+                            </tr>
+                            <tr>
+                                <td>Cordoama</td>
+                                <td>Bastante no Verão</td>
+                                <td>Ága gelada</td>
+                                <td>Tipo Morangos com Acúcar</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ############################################################## -->
+
+                
+                <div class="col-xs-6">
+                    <h2 id="capitais">Capitais do Mundo</h2>
+                    <p><span class="enfatizar destacar">Capitais</span> não só culturais, mas aquelas que são distintas por nos oferecerem o prazer de apenas deambularmos pelas ruas ou pararmos numa esplanada a beber um café.</p>
+                    <p><span class="enfatizar">Exemplo</span> de topo será sempre <span class="enfatizar">Lisboa</span> que combina uma heterogenidade e diversidade de enquadramentos paisagisticos inagualáveis por nenhum outro lugar no mundo.</p>
+                    <p>Ranking das melhores capitais do mundo:</p>
+                    <div class="billboard">
+                        <dl>
+                            <dt>Lisboa </dt>
+                            <dd>reune todos os atributos das melhores cidades: paisagens, comida, jardins, castelos, cultura, rio, praias, etc.</dd>
+                            <dt>Barcelona</dt>
+                            <dd>a par de Lisboa reune as mesmas condições, ganhando apenas na parte cultural</dd>
+                            <dt>Paris</dt>
+                            <dd>Um bluff... Existe, desenas de capitais iguais no norte da Europa.</dd>
+                        </dl>
+                    </div>
+                    <div class="billboard">
+                        <ul>
+                            <li>Lisboa -- reune todos os atributos das melhores cidades: paisagens, comida, jardins, castelos, cultura, rio, praias, etc.</li>
+                            <li>Barcelona -- a pare de Lisboa reune as mesmas condições, ganhando apenas na parte cultural</li>
+                            <li>Paris -- Um bluff... Existe, desenas de capitais iguais no norte da Europa.</li>
+                        </ul>
+                    </div>
+                    <div class="billboard">
+                        <ol>
+                            <li>Lisboa -- reune todos os atributos das melhores cidades: paisagens, comida, jardins, castelos, cultura, rio, praias, etc.</li>
+                            <li>Barcelona -- a pare de Lisboa reune as mesmas condições, ganhando apenas na parte cultural</li>
+                            <li>Paris -- Um bluff... Existe, desenas de capitais iguais no norte da Europa.</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+</body>	
+</html>

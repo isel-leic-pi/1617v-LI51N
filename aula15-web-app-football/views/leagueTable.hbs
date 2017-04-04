@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+        <title>league table</title>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+	</head>
+    <body>
+		<div class="container">
+			<p> ID= {{id}}</p>
+			<p> Caption= {{caption}}</p>
+			<div class="panel panel-default">
+				<table class="table">
+					<thead>
+						<tr>
+							<td>Id </td>
+							<td>Name </td>
+							<td>Position</td>
+							<td>Points</td>
+							<td> Goals</td>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each teams}}
+						<tr>
+							<td>
+								<a href={{urlTeam}}>{{id}}</a>
+							</td>
+							<td>{{name}}</td>
+							<td>{{position}}</td>
+							<td>{{points}}</td>
+							<td>{{goals}}</td>
+						</tr>
+						{{/each}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+    </body>
+</html>
