@@ -3,6 +3,7 @@
 const football = require('./../footballService')
 const fs = require('fs')
 const handlebars = require('handlebars')
+const util = require('util')
 
 module.exports = {
     leagues,
@@ -14,13 +15,18 @@ const leaguesView = handlebars.compile(
 const leagueTableView = handlebars.compile(
     fs.readFileSync('./views/leagueTable.hbs').toString())
 
+handlebars.registerHelper('linkForLeague', linkForLeague)
+
+function linkForLeague(id, caption){
+    return  util.format(
+        '<a href="leagueTable?id=%s">%s</a>', 
+        id,
+        caption)
+}
+
 function leagues(query, cb) {
     football.getLeagues((err, leagues) => {
         if(err) cb(err)
-        leagues = leagues.map(l => {
-            l.url = 'leagueTable?id=' + l.id
-            return l
-        })
         cb(null, leaguesView(leagues))
     })
 }
