@@ -15,18 +15,26 @@ const leaguesView = handlebars.compile(
 const leagueTableView = handlebars.compile(
     fs.readFileSync('./views/leagueTable.hbs').toString())
 
-handlebars.registerHelper('linkForLeague', linkForLeague)
+handlebars.registerPartial('leagueLink', 
+    fs.readFileSync('./views/partials/leagueLink.hbs').toString())
 
+handlebars.registerPartial('layout', 
+    fs.readFileSync('./views/partials/layout.hbs').toString())
+
+/*
+handlebars.registerHelper('linkForLeague', linkForLeague)
 function linkForLeague(id, caption){
     return  util.format(
         '<a href="leagueTable?id=%s">%s</a>', 
         id,
         caption)
 }
+*/
 
 function leagues(query, cb) {
     football.getLeagues((err, leagues) => {
         if(err) cb(err)
+        leagues.title = 'Leagues'
         cb(null, leaguesView(leagues))
     })
 }
@@ -35,6 +43,7 @@ function leagueTable(query, cb) {
     if(!query.id) return cb(new Error('Id not found'))
     football.getLeagueTable(query.id, (err, leagueTable) => {
         if(err) return cb(err)
+        leagueTable.title = 'League Table'
         cb(null, leagueTableView(leagueTable))
     })
 }
