@@ -6,19 +6,27 @@
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 	</head>
     <body>
-        <table>
-        <tr>
-            <th>Year</th>
-            <th>League</th>
-            <th>Caption</th>
-        </tr>
-        {{#each .}}
-            <tr>
-                <td>{{year}}</td>
-                <td>{{league}}</td>
-                <td>{{caption}}</td>
-            </tr>
-        {{/each}}
-        </table>
+        <div class="container">
+            <div class="panel panel-default">
+                <table class="table">
+                    <tr>
+                        <th>Year</th>
+                        <th>League</th>
+                        <th>Caption</th>
+                    </tr>
+                    {{#each .}}
+                        <tr>
+                            <td>{{year}}</td>
+                            <td>{{league}}</td>
+                            <td>
+                                <a href='{{url}}'>
+                                    {{caption}}
+                                </a>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </table>
+            </div>
+        </div>
     </body>
 </html>

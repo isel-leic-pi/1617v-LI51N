@@ -17,6 +17,10 @@ const leagueTableView = handlebars.compile(
 function leagues(query, cb) {
     football.getLeagues((err, leagues) => {
         if(err) cb(err)
+        leagues = leagues.map(l => {
+            l.url = 'leagueTable?id=' + l.id
+            return l
+        })
         cb(null, leaguesView(leagues))
     })
 }
