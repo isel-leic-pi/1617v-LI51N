@@ -1,8 +1,10 @@
 const http = require('http')
 const connect = require('./../connect-naif')
+const serveStatic = require('serve-static')
 const url = require('url')
 const fs = require('fs')
 const footballCtr = require('./controller/footballController')
+
 
 const port = process.argv[2] | 3000
 const app = connect()
@@ -11,7 +13,8 @@ const app = connect()
  * Build connect Middlewares stack
  */
 app.use(parsePath)
-app.use(readCss)
+// app.use(readCss)
+app.use(serveStatic('public'))
 app.use(footballAction)
 app.use((req, resp) => sendResponse(resp, 404, 'Resource not Found'))
 app.use((err, req, resp, next) => sendResponse(resp, 500, err.message))
