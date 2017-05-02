@@ -30,7 +30,8 @@ function buildFootballService(req) {
         req(path, (err, resp, body) => {
             if(err) return cb(err)
             const data = JSON.parse(body.toString())
-            cb(null, new LeagueTable(id,data)) 
+            if(!data.standing) cb(new Error('Illegal League Table!!'))
+            else cb(null, new LeagueTable(id,data)) 
         })
     }
     return obj
