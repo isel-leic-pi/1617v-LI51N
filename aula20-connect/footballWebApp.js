@@ -1,5 +1,5 @@
 const http = require('http')
-const connect = require('connect')
+const connect = require('./../connect-naif')
 const url = require('url')
 const fs = require('fs')
 const footballCtr = require('./controller/footballController')
