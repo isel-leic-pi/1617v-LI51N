@@ -5,12 +5,26 @@
                 <th>Year</th>
                 <th>League</th>
                 <th>Caption</th>
+                {{#if showAddFavourites}}
+                    <th>Add to Favourites</th>
+                {{/if}}
             </tr>
             {{#each .}}
                 <tr>
                     <td>{{year}}</td>
                     <td>{{league}}</td>
                     <td>{{> leagueLink}}</td>
+                    {{#if @root.showAddFavourites}}
+                    <td>
+                        <form action="/football/addFavourite" method="POST">
+                            <input type="hidden" name="id" value="{{id}}"/>
+                            <input type="hidden" name="year" value="{{year}}"/>
+                            <input type="hidden" name="league" value="{{league}}"/>
+                            <input type="hidden" name="caption" value="{{caption}}"/>
+                            <input type="submit" value="Add" class="btn"/>
+                        </form>
+                    </td>
+                    {{/if}}
                 </tr>
             {{/each}}
         </table>
