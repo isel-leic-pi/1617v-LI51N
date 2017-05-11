@@ -9,12 +9,12 @@
                     <th>Add to Favourites</th>
                 {{/if}}
             </tr>
-            {{#each .}}
+            {{#each leagues}}
                 <tr>
                     <td>{{year}}</td>
                     <td>{{league}}</td>
                     <td>{{> leagueLink}}</td>
-                    {{#if @root.showAddFavourites}}
+                    {{#if ../showAddFavourites}}
                     <td>
                         <form action="/football/addFavourite" method="POST">
                             <input type="hidden" name="id" value="{{id}}"/>

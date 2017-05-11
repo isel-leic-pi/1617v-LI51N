@@ -7,16 +7,18 @@ module.exports = {
     leagues,
     getLeagueTable,
     favourites,
-    postAddFavourite,
-    postDummy
+    postAddFavourite
 }
 
 function leagues(req, cb) {
     football.getLeagues((err, leagues) => {
         if(err) cb(err)
-        leagues.title = 'Leagues'
-        leagues.showAddFavourites = true
-        cb(null, leagues)
+        const ctx = {
+            title: 'Leagues',
+            showAddFavourites: true,
+            leagues
+        }
+        cb(null, ctx)
     })
 }
 
@@ -29,7 +31,10 @@ function getLeagueTable(req, res, next) {
     })
 }
 
-const favouritesList = []
+const favouritesList = {
+    leagues: [],
+    title: 'Favourites'
+} 
 
 function favourites(req, res) {
     res.render('leagues', favouritesList)
@@ -37,10 +42,6 @@ function favourites(req, res) {
 
 function postAddFavourite(req, res, next) {
     if(!req.body.id) next(new Error('Missing id on body!!s'))
-    favouritesList.push(new League(req.body))
+    favouritesList.leagues.push(new League(req.body))
     res.redirect('/football/favourites')
-}
-
-function postDummy(req, res) {
-    res.send(200)
 }
