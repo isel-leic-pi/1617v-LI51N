@@ -22,6 +22,15 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')
 hbs.registerPartials(__dirname + '/views/partials')
 /**
+ * Setup passport
+ */
+passport.use('basic', {
+    authenticate: function(req) {
+        console.log('Authenticating...')
+        this.redirect('/football/leagues')
+    }
+})
+/**
  * Middlewares
  */
 // uncomment after placing your favicon in /public
@@ -32,7 +41,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/football', buildRoutes(footballCtr))
-
+app.post('/login', passport.authenticate('basic'))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
