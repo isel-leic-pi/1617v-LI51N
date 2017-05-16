@@ -10,6 +10,7 @@ const bodyParser = require('body-parser')
 const hbs = require('hbs')
 const passport = require('passport')
 const session = require('express-session')
+const flash = require('express-flash')
 /**
  * Import local packages
  */
@@ -32,7 +33,7 @@ passport.use('basic', {
         console.log('Authenticating...')
         usersService.authenticate(req.body.username, req.body.password, (err, user, info) => {
             if(err) return this.error(err)
-            if(!user) return this.fail(info)
+            if(!user) return this.fail({message: info})
             this.success(user) // => redirect + gravar no Cookie o user
         })
     }
@@ -57,6 +58,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(session({secret: 'keyboard cat', resave: false, saveUninitialized: true }))
 app.use(passport.initialize())
 app.use(passport.session()) // Obtem da sessão user id -> deserialize(id) -> user -> req.user
+app.use(flash())
 app.use((req, res, next) => { 
     res.locals.user = req.user; next() 
 })
@@ -66,7 +68,8 @@ app.use((req, res, next) => {
 app.use('/football', buildRoutes(footballCtr))
 app.post('/login', passport.authenticate('basic', {
     successRedirect: '/football/leagues',
-    failureRedirect: '/login'
+    failureRedirect: '/login',
+    failureFlash: true 
 }))
 app.get('/login', (req, res) => res.render('login'))
 
