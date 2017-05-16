@@ -9,11 +9,13 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const hbs = require('hbs')
 const passport = require('passport')
+const session = require('express-session')
 /**
  * Import local packages
  */
 const footballCtr = require('./controller/footballController')
 const buildRoutes = require('./util/build-routes')
+const usersService = require('./usersService.js')
 const app = express()
 /**
  * Setup web app
@@ -21,14 +23,26 @@ const app = express()
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')
 hbs.registerPartials(__dirname + '/views/partials')
+hbs.localsAsTemplateData(app)
 /**
  * Setup passport
  */
 passport.use('basic', {
     authenticate: function(req) {
         console.log('Authenticating...')
-        this.redirect('/football/leagues')
+        usersService.authenticate(req.body.username, req.body.password, (err, user, info) => {
+            if(err) return this.error(err)
+            if(!user) return this.fail(info)
+            this.success(user) // => redirect + gravar no Cookie o user
+        })
     }
+})
+passport.serializeUser(function(user, cb) {
+    cb(null, user.username)
+})
+
+passport.deserializeUser(function(username, cb) {
+    usersService.find(username, cb)
 })
 /**
  * Middlewares
@@ -40,8 +54,20 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(session({secret: 'keyboard cat', resave: false, saveUninitialized: true }))
+app.use(passport.initialize())
+app.use(passport.session()) // Obtem da sessão user id -> deserialize(id) -> user -> req.user
+app.use((req, res, next) => { 
+    res.locals.user = req.user; next() 
+})
+/**
+ * Routes
+ */
 app.use('/football', buildRoutes(footballCtr))
-app.post('/login', passport.authenticate('basic'))
+app.post('/login', passport.authenticate('basic', {
+    successRedirect: '/football/leagues',
+    failureRedirect: '/login'
+}))
 app.get('/login', (req, res) => res.render('login'))
 
 // catch 404 and forward to error handler
