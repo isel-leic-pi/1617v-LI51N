@@ -3,23 +3,33 @@
 const http = require('http')
 const express = require('express')
 const cookieParser = require('cookie-parser')
+const session = require('express-session')
+const flash = require('connect-flash')
 /**
  * Setup express
  */
 const app = express()
 app.use(cookieParser())
-app.use((req, resp, next) => {
-    for(let p in req.cookies)
-        console.log(p + ' = ' + req.cookies[p])
+app.use(session({ secret: 'keyboard cat', resave: false,saveUninitialized: true}))
+app.use(flash())
+app.use((req, res, next) => {
+    console.log('#####################')
+    for(let p in req.session)
+        console.log(p + ' = ' + req.session[p])
+    console.log('dummy = ' + req.flash('dummy'))
     next()
+
 })
-app.use((req, resp) => {
-    // <=> resp.setHeader('Set-Cookie', 'author=Miguel')
-    resp.cookie('author', 'Fernando', {expires: new Date(Date.now() + 900000)})
-    resp.cookie('location', 'Lisbon', {expires: new Date(Date.now() + 900000)})
-    resp.cookie('author', 'Miguel', {expires: new Date(Date.now() + 900000)})
-    resp.end()
+app.get('/dummy', (req, res) => {
+    req.flash('dummy', 'stuff')
+    res.redirect('/')
 })
+app.use((req, res) => {
+    req.session.author = 'Carlos'
+    req.session.location = 'Porto'
+    res.end()
+})
+
 /**
  * Launch server
  */
