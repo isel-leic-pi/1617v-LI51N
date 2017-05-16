@@ -7,7 +7,18 @@
 	</head>
     <body>
 		<div class="container">
-			{{> @partial-block}}
+			<div class="row">
+				<div class="panel col-xs-3">
+					{{#if @user}}
+						{{> favourites}}
+					{{else}}
+						<a class="center-block btn btn-primary" href='/login'>Login</a>
+					{{/if}}
+				</div>
+				<div class="col-xs-9">
+					{{> @partial-block}}
+				</div>
+			</div>
 		</div>
     </body>
 </html>
