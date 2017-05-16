@@ -42,6 +42,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/football', buildRoutes(footballCtr))
 app.post('/login', passport.authenticate('basic'))
+app.get('/login', (req, res) => res.render('login'))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
