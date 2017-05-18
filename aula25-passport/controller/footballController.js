@@ -5,12 +5,12 @@ const League = require('./../model/League')
 
 module.exports = {
     leagues,
-    getLeagueTable,
+    getLeaguesTableId,
     favourites,
     postAddFavourite
 }
 
-function leagues(req, cb) {
+function leagues(cb) {
     football.getLeagues((err, leagues) => {
         if(err) cb(err)
         const ctx = {
@@ -22,12 +22,12 @@ function leagues(req, cb) {
     })
 }
 
-function getLeagueTable(req, res, next) {
-    if(!req.query.id) return next(new Error('Id not found'))
-    football.getLeagueTable(req.query.id, (err, leagueTable) => {
-        if(err) return next(err)
+function getLeaguesTableId(id, cb) {
+    if(!id) return cb(new Error('Id not found'))
+    football.getLeagueTable(id, (err, leagueTable) => {
+        if(err) return cb(err)
         leagueTable.title = 'League Table'
-        res.render('leagueTable', leagueTable)
+        cb(null, leagueTable)
     })
 }
 

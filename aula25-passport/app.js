@@ -11,11 +11,12 @@ const hbs = require('hbs')
 const passport = require('passport')
 const session = require('express-session')
 const flash = require('express-flash')
+const sitemapHtml = require('express-sitemap-html')
+const connectCtr = require('connect-controller')
 /**
  * Import local packages
  */
 const footballCtr = require('./controller/footballController')
-const buildRoutes = require('./util/build-routes')
 const usersService = require('./usersService.js')
 const app = express()
 /**
@@ -65,14 +66,14 @@ app.use((req, res, next) => {
 /**
  * Routes
  */
-app.use('/football', buildRoutes(footballCtr))
+app.use('/football', connectCtr(footballCtr))
 app.post('/login', passport.authenticate('basic', {
     successRedirect: '/football/leagues',
     failureRedirect: '/login',
     failureFlash: true 
 }))
 app.get('/login', (req, res) => res.render('login'))
-
+app.get('/', sitemapHtml(app))
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     const err = new Error('Not Found')
