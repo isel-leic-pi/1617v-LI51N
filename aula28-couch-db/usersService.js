@@ -1,10 +1,9 @@
 'use strict'
 
 const fs = require('fs')
-/**
- * Array of User objects
- */
-const dbUsers = require('./data/usersDb.json')
+const httpReq = require('request')
+
+const FOOTBALL_DB = 'http://127.0.0.1:5984/football/'
 
 module.exports = {
     'find': find,
@@ -13,10 +12,13 @@ module.exports = {
 }
 
 function find(username, cb) {
-    const user = dbUsers.find(item => item.username == username)
-    cb(null, user)
+    const path = FOOTBALL_DB + username
+    httpReq(path, (err, resp, body) => {
+        if(err) return cb(err)
+        if(resp.statusCode != 200) return cb(err, null)
+        cb(null, JSON.parse(body))
+    })
 }
-
 /**
  * @param String username 
  * @param String passwd 
@@ -24,10 +26,12 @@ function find(username, cb) {
  * but credentials fail then calls cb with undefined user and an info message.
  */
 function authenticate(username, passwd, cb) {
-    const user = dbUsers.find(item => item.username == username)
-    if(!user) return cb(null, null, 'User does not exists')
-    if(passwd != user.password) return cb(null, null, 'Invalid password')
-    cb(null, user)
+    find(username, (err, user) => {
+        if(err) cb(err)
+        if(!user) return cb(null, null, 'User does not exists')
+        if(passwd != user.password) return cb(null, null, 'Invalid password')
+        cb(null, user)
+    })
 }
 
 function save() {
