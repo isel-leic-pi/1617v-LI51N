@@ -1,0 +1,11 @@
+<h3>{{@user.fullname}}</h3>
+<table class="table">
+    <tr>
+        <th>Caption</th>
+    </tr>
+    {{#each @user.leagues}}
+        <tr>
+            <td>{{> leagueLink}}</td>
+        </tr>
+    {{/each}}
+</table>
