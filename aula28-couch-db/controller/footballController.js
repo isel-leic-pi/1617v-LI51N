@@ -7,7 +7,7 @@ module.exports = {
     leagues,
     getLeaguesTableId,
     favourites,
-    postAddFavourite
+    postFavourite
 }
 
 function leagues(cb) {
@@ -31,17 +31,12 @@ function getLeaguesTableId(id, cb) {
     })
 }
 
-const favouritesList = {
-    leagues: [],
-    title: 'Favourites'
-} 
-
 function favourites(req, res) {
-    res.render('leagues', favouritesList)
+    res.render('leagues', req.user)
 }
 
-function postAddFavourite(req, res, next) {
+function postFavourite(req, res, next) {
     if(!req.body.id) next(new Error('Missing id on body!!s'))
-    favouritesList.leagues.push(new League(req.body))
+    req.user.leagues.push(new League(req.body))
     res.redirect('/football/favourites')
 }

@@ -16,7 +16,7 @@
                     <td>{{> leagueLink}}</td>
                     {{#if ../showAddFavourites}}
                     <td>
-                        <form action="/football/addFavourite" method="POST">
+                        <form action="/football/favourite" method="POST">
                             <input type="hidden" name="id" value="{{id}}"/>
                             <input type="hidden" name="year" value="{{year}}"/>
                             <input type="hidden" name="league" value="{{league}}"/>
