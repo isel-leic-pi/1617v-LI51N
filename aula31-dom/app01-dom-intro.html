@@ -1,0 +1,29 @@
+ <html>
+     <head>
+         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+         <script>
+             console.log('Loading page....')
+             sayHello()
+
+             function sayHello() {
+                 console.log('Hello...')
+             }
+             function changeColor() {
+                const btAdd = document.getElementById('btAdd')
+                const rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+                btAdd.style.backgroundColor = rndCol;
+            }
+
+            function random(number) {
+                return Math.floor(Math.random()*number);
+            }
+         </script>
+     </head>
+     <body>
+         <div class="container">
+             <h1>DOM intro</h1>
+             <button id="btAdd" onclick="sayHello(); changeColor();">Add</button>
+            
+         </div>
+     </body>
+ </html>
