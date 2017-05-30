@@ -15,10 +15,14 @@
     function addCoreWeb(){
         const ulCoreWeb = document.querySelector('#ulCoreWeb')
         const txtConcept = document.querySelector('#txtConcept')
+        /*
         const txt = document.createTextNode(txtConcept.value)
         const li = document.createElement('li')
         li.appendChild(txt)
         ulCoreWeb.appendChild(li)
+        */
+        const li = '<li>' + txtConcept.value + '</li>'
+        ulCoreWeb.innerHTML += li
     }
     function random(number) {
         return Math.floor(Math.random()*number);
