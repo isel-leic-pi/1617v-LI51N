@@ -1,0 +1,20 @@
+{
+  "name": "myapp",
+  "description": "",
+  "main": "",
+  "authors": [
+    "fmcarvalho <mcarvalho@cc.isel.ipl.pt>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/isel-leic-pi/1617v-LI51N",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "handlebars": "^4.0.10"
+  }
+}
